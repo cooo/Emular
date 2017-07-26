@@ -24,7 +24,11 @@ class Io
       puts "Could not find a rom with the name #{@rom_file}"
 		end
 		
-    return bytes
-  end
+    bytes
+	end
+	
+	def roms
+		# lists the roms in ROM_PATH
+	end
 
 end

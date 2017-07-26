@@ -4,7 +4,7 @@ require './emular.rb'
 
 
 def starts_with_hyphen?(word)
-  return word[0]=='-'
+  word[0]=='-'
 end
 
 debug = false
