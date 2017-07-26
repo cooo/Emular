@@ -1,13 +1,13 @@
 class Rom
 
-	attr_reader :bytes
+  attr_reader :bytes
 
-	def initialize(bytes)
-		@bytes = bytes
-	end
+  def initialize(bytes)
+    @bytes = bytes
+  end
 
-	def size
-		@bytes.size
-	end
+  def size
+    @bytes.size
+  end
 
 end
