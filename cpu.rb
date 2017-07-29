@@ -29,10 +29,4 @@ class Cpu
     v[0xf] = set ? "01" : "00"
   end
 
-  private
-
-    def hex(dec)
-      "0x#{dec.to_s(16)} (#{dec})"
-    end
-
 end

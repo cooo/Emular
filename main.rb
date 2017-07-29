@@ -7,6 +7,11 @@ def starts_with_hyphen?(word)
   word[0]=='-'
 end
 
+def hex(dec)
+  "0x#{dec.to_s(16)} (#{dec})"
+end
+
+
 debug = false
 file = ""
 ARGV.each do |arg|

@@ -2,8 +2,6 @@
 class Memory
   MEMORY_SIZE = 4096
 
-  attr_reader :memory
-  
   def initialize
     @memory = Array.new(MEMORY_SIZE, "00")
   end
@@ -18,7 +16,7 @@ class Memory
     @memory[pc] + @memory[pc+1]
   end
 
-  def read(address)
+  def [](address)
     @memory[address]
   end
 
@@ -33,12 +31,5 @@ class Memory
     end
     result
   end
-
-  private 
-
-    def hex(dec)
-      "0x#{dec.to_s(16)} (#{dec})"
-    end
-
 
 end

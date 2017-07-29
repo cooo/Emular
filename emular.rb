@@ -215,10 +215,6 @@ class Emular
     obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
   end
 
-  def hex(dec)
-    "0x#{dec.to_s(16)} (#{dec})"
-  end
-
   def breakpoint?(address)
     breakpoints.include?(address)
   end

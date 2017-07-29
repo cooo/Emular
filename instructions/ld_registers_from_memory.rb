@@ -11,7 +11,7 @@ class LdRegistersFromMemory
   def execute(cpu)
     registers = @opcode[1].hex
     for i in 0..registers
-      cpu.v[i] = cpu.emular.memory.read(cpu.i + i)
+      cpu.v[i] = cpu.emular.memory[cpu.i + i]
     end
 
     cpu.i = cpu.i + registers + 1   # there's a discussion about this line
