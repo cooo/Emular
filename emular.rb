@@ -1,4 +1,5 @@
 require './cpu.rb'
+require './memory.rb'
 require './stack.rb'
 
 class Emular
@@ -10,8 +11,6 @@ class Emular
   attr_reader :breakpoints
 
   ROM_START = 0x200
-  MEMORY_SIZE = 4096
-  
   SCREEN_WIDTH = 64
   SCREEN_HEIGHT = 32
 
@@ -28,9 +27,9 @@ class Emular
   end
 
   def reset
-    @memory = Array.new(MEMORY_SIZE, "00")
-    @frame_buffer = Array.new(SCREEN_HEIGHT) { Array.new(SCREEN_WIDTH, 0) }
+    @memory = Memory.new
     @stack = Stack.new
+    @frame_buffer = Array.new(SCREEN_HEIGHT) { Array.new(SCREEN_WIDTH, 0) }
     @pc = ROM_START
     @sp = 0
   end
@@ -38,7 +37,7 @@ class Emular
   def load(rom)
     @rom = rom
     if rom.size>0
-      memory.insert(ROM_START, *rom.bytes).slice!(MEMORY_SIZE, rom.size)
+      @memory.write(ROM_START, *rom.bytes)
     else
       puts "Warning, you're loading an empty rom"
     end
@@ -61,7 +60,7 @@ class Emular
       emulate = debug(command) if command
       
       if emulate
-        opcode = memory[pc] + memory[pc+1]
+        opcode = @memory.fetch(pc)
         #puts "pc: #{pc} use_d: #{use_debugger} bp?#{breakpoint?(pc)} halt?: #{@halt}"
         if (use_debugger && breakpoint?(pc)) && @do_not_stop
           @halt = true
@@ -179,9 +178,7 @@ class Emular
         count = 10
       end
       puts "memory from #{address} to #{address+count}"
-      for i in address..(address+count)
-        puts "#{hex(i)}: #{memory[i]}"
-      end
+      puts memory.to_s(address, count)
 
     when "pc"
       puts hex(pc)

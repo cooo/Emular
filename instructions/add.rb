@@ -16,7 +16,7 @@ class Add
     value = cpu.v[reg_x].to_i + cpu.v[reg_y].to_i;
     cpu.flag(value>0xff)
     value = value & 0b011111111
-    cpu.v[reg_x] = to_s.rjust(2, "0")
+    cpu.v[reg_x] = value.to_s.rjust(2, "0")
   end
 
   def to_s

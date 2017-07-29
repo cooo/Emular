@@ -17,12 +17,7 @@ class LdBcd
     tens = ((value - ones) / 10) % 10
     hundreds = ((value - tens*10 - ones) / 100) % 10
 
-    puts "BCD: #{value} => #{hundreds} #{tens} #{ones}"
-
-    cpu.emular.memory[cpu.i] = hundreds.to_s(16).rjust(2, "0")
-    cpu.emular.memory[cpu.i + 1] = tens.to_s(16).rjust(2, "0")
-    cpu.emular.memory[cpu.i + 2] = ones.to_s(16).rjust(2, "0")
-    
+    cpu.emular.memory.write(cpu.i, hundreds, tens, ones)
   end
 
   def to_s
