@@ -1,4 +1,5 @@
 # 6xkk - LD Vx, byte
+# -------------------------
 # Set Vx = kk. The interpreter puts the value kk into register Vx.
 class LdByte
 

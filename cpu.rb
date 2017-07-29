@@ -25,7 +25,7 @@ class Cpu
     instructions.find { |instruction| instruction.match?(opcode)}
   end
 
-  def flag(set)
+  def flag=(set)
     v[0xf] = set ? "01" : "00"
   end
 

@@ -1,6 +1,7 @@
 require './cpu.rb'
 require './memory.rb'
 require './stack.rb'
+require './frame_buffer.rb'
 
 class Emular
 
@@ -11,8 +12,6 @@ class Emular
   attr_reader :breakpoints
 
   ROM_START = 0x200
-  SCREEN_WIDTH = 64
-  SCREEN_HEIGHT = 32
 
   def initialize(options)
     @use_debugger = options[:debug]
@@ -29,7 +28,7 @@ class Emular
   def reset
     @memory = Memory.new
     @stack = Stack.new
-    @frame_buffer = Array.new(SCREEN_HEIGHT) { Array.new(SCREEN_WIDTH, 0) }
+    @frame_buffer = FrameBuffer.new
     @pc = ROM_START
     @sp = 0
   end
@@ -103,17 +102,19 @@ class Emular
         print "#{index.to_s(16)}: #{reg}\t\t\t"
         print "\n" if (index+1)%4==0
       end
-      puts "i: #{cpu.i}"
+      puts "i: #{hex(cpu.i)}"
       p cpu.v
     when "stack","st"
       puts @stack.to_s
+    when "fb","fr"
+      puts @frame_buffer.to_s
     when /^[b|sb].+$/
       breakpoint = command[2..-1].strip.to_i
-      if (breakpoint>=ROM_START && breakpoint<MEMORY_SIZE)
+      if (breakpoint>=ROM_START && breakpoint<@memory.size)
         puts "set breakpoint at #{hex(breakpoint)}, see all breakpoints with 'b'"
         breakpoints.push(breakpoint.to_i)
       else
-        puts "invalid breakpoint, should be between (#{ROM_START} and #{MEMORY_SIZE})"
+        puts "invalid breakpoint, should be between (#{ROM_START} and #{@memory.size})"
       end
       return false
     when /^b$/
@@ -141,22 +142,21 @@ class Emular
       option_2 = options[2].strip if options.size>2
             
       offset = 0
-      count = 9
+      count = 10
       if (option_1=="-")
         puts "list #{option_1}"
         offset = 18
       elsif (option_1 && option_2 && is_numeric?(option_1) )
         puts "list #{option_1},#{option_2}"
         offset = pc - option_1.to_i
-        
       elsif (option_1 && is_numeric?(option_1))
         puts "list #{option_1}"
         offset = option_1.to_i
-        count = option_1.to_i - 1
+        count = option_1.to_i
       end
       address = pc - offset
-      for i in 0..count
-        opcode = memory[address] + memory[address+1]
+      count.times do |i|
+        opcode = memory.fetch(address)
         instruction = cpu.find(opcode)
         puts "#{address==pc ? ">" : " "}#{breakpoint?(address) ? "* " : "  "} #{hex(address)} #{instruction}"
         address = address + 2
@@ -178,7 +178,7 @@ class Emular
         count = 10
       end
       puts "memory from #{address} to #{address+count}"
-      puts memory.to_s(address, count)
+      puts memory.to_s(address, address+count)
 
     when "pc"
       puts hex(pc)
@@ -188,8 +188,9 @@ class Emular
       puts "s       = step, execute one instruction"
       puts "<enter> = repeats last command"
       puts "c       = continue"
-      puts "r       = show the registers, v1..vf, index (i)"
+      puts "r       = show the registers, v1..vf and index (i)"
       puts "st      = show the stack with the stack pointer (sp)"
+      puts "fb      = display the frame buffer"
       puts "pc      = show the program counter (pc)"
       puts "b       = show the breakpoints"
       puts "b 512   = set a breakpoint at memory location 512 (0x200)"

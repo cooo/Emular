@@ -26,7 +26,7 @@ class Memory
 
   def to_s(from, to)
     result = ""
-    for i in from..(from+to)
+    from.upto(to) do |i|
       result += "#{hex(i)}: #{@memory[i]}\n"
     end
     result

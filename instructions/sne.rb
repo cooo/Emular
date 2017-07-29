@@ -1,4 +1,5 @@
 # 4xkk - SNE Vx, byte
+# -------------------------
 # Skip next instruction if Vx != kk. The interpreter compares register Vx to kk, and if they are # not equal, increments the program counter by 2.
 class Sne
 

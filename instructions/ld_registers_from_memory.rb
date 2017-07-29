@@ -1,4 +1,5 @@
 # Fx65 - LD Vx, [I]
+# -------------------------
 # Fills V0 to VX with values from memory starting at address I. 
 # I is then set to I + x + 1.
 class LdRegistersFromMemory
@@ -10,7 +11,7 @@ class LdRegistersFromMemory
 
   def execute(cpu)
     registers = @opcode[1].hex
-    for i in 0..registers
+    (0..registers).each do |i|
       cpu.v[i] = cpu.emular.memory[cpu.i + i]
     end
 

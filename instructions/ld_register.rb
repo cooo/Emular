@@ -1,4 +1,5 @@
 # 8xy0 - LD Vx, Vy
+# -------------------------
 # Set Vx = Vy. Stores the value of register Vy in register Vx
 class LdRegister
 
