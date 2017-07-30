@@ -14,12 +14,13 @@ class Drw
   end
 
   def execute(cpu)
-    reg_x = @opcode[1].hex
-    reg_y = @opcode[2].hex
+    reg_x = @opcode[1]
+    reg_y = @opcode[2]
     nibble = @opcode[3].hex
-    x = cpu.v[reg_x].hex
-    y = cpu.v[reg_y].hex
+    x = cpu.v[reg_x]
+    y = cpu.v[reg_y]
     sprite = []
+    puts hex(cpu.i)
     nibble.times do |i|
       sprite << cpu.emular.memory[cpu.i + i]
     end

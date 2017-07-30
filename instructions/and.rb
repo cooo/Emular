@@ -12,12 +12,9 @@ class And
   end
 
   def execute(cpu)
-    reg_x = @opcode[1].hex
-    reg_y = @opcode[2].hex
-    cpu.v[reg_x] = (cpu.v[reg_x].hex & cpu.v[reg_y].hex).to_s(16).rjust(2, "0")
-
-    # TODO: make it work like:
-    # cpu.v[reg_x] = cpu.v[reg_x] & cpu.v[reg_y]
+    reg_x = @opcode[1]
+    reg_y = @opcode[2]
+    cpu.v[reg_x] = cpu.v[reg_x] & cpu.v[reg_y]
   end
 
   def to_s

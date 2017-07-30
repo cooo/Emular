@@ -9,8 +9,8 @@ class AddIndex
   end
 
   def execute(cpu)
-    reg_x = @opcode[1].hex
-    value = cpu.v[reg_x].hex + cpu.i;
+    reg_x = @opcode[1]
+    value = cpu.v[reg_x] + cpu.i;
     cpu.i = value
   end
 

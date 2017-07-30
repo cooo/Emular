@@ -9,8 +9,8 @@ class LdByte
   end
 
   def execute(cpu)
-    register = @opcode[1].hex
-    cpu.v[register] = @opcode[2,2]
+    reg_x = @opcode[1]
+    cpu.v[reg_x] = @opcode[2,2]
   end
 
   def to_s

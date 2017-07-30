@@ -1,13 +1,16 @@
 require "./instructions.rb"
+require "./registers.rb"
 
 class Cpu
 
+  FLAG = "f"
+
   attr_reader :emular   # delegate
-  attr_accessor :v, :i    # registers
+  attr_accessor :v, :i  # registers
   
   def initialize(emular)
     @emular = emular
-    @v = Array.new(16, "00")
+    @v = Registers.new
     @i = 0
   end
 
@@ -26,7 +29,7 @@ class Cpu
   end
 
   def flag=(set)
-    v[0xf] = set ? "01" : "00"
+    v[FLAG] = set ? "01" : "00"
   end
 
 end

@@ -12,8 +12,8 @@ class LdBcd
   end
 
   def execute(cpu)
-    reg_x = @opcode[1].hex
-    value = cpu.v[reg_x].hex
+    reg_x = @opcode[1]
+    value = cpu.v[reg_x]
     ones = value % 10
     tens = ((value - ones) / 10) % 10
     hundreds = ((value - tens*10 - ones) / 100) % 10

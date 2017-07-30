@@ -12,10 +12,10 @@ class LdRegistersFromMemory
   def execute(cpu)
     registers = @opcode[1].hex
     (0..registers).each do |i|
-      cpu.v[i] = cpu.emular.memory[cpu.i + i]
+      cpu.v[i.to_s] = cpu.emular.memory[cpu.i + i]
     end
 
-    cpu.i = cpu.i + registers + 1   # there's a discussion about this line
+    #cpu.i = cpu.i + registers + 1   # there's a discussion about this line
   end
 
   def to_s

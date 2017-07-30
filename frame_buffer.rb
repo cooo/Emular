@@ -20,13 +20,20 @@ class FrameBuffer
   # 1  0  =  1  there was a pixel, there is no pixel  => pixel
   # 1  1  =  0  there was a pixel, there is pixel     => no pixel, collision
   def write(x,y, sprite)
+    puts "write at #{x}, #{y}"
+    sprite.each do |line|
+      puts line.hex.to_s(2)
+    end
+
     collision = false
     sprite.each_with_index do |sprite_line, row_index|
-      bits = sprite_line.hex.to_s(2).split(//).map(&:to_i)
+      bits = sprite_line.hex.to_s(2).rjust(8, "0").split(//).map(&:to_i)
       bits.each_with_index do |bit, column_index|
-        current_bit = @frame_buffer[y+row_index][x+column_index]
+        vx = (x+column_index) % SCREEN_WIDTH
+        vy = (y+row_index) % SCREEN_HEIGHT
+        current_bit = @frame_buffer[vy][vx]
         collision = true if (current_bit==1 && bit==1)
-        @frame_buffer[y+row_index][x+column_index] = current_bit ^ bit
+        @frame_buffer[vy][vx] = current_bit ^ bit
       end
     end
     collision

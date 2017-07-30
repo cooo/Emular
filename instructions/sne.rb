@@ -1,6 +1,7 @@
 # 4xkk - SNE Vx, byte
 # -------------------------
-# Skip next instruction if Vx != kk. The interpreter compares register Vx to kk, and if they are # not equal, increments the program counter by 2.
+# Skip next instruction if Vx != kk. The interpreter compares register Vx to kk, 
+# and if they are not equal, increments the program counter by 2.
 class Sne
 
   def match?(opcode)
@@ -9,9 +10,9 @@ class Sne
   end
 
   def execute(cpu)
-    reg_x = @opcode[1].hex
-    byte = @opcode[2,2]
-    if (cpu.v[reg_x]!=byte)
+    reg_x = @opcode[1]
+    byte = @opcode[2,2].hex
+    if (cpu.v[reg_x] != byte)
       cpu.emular.pc_inc
     end
   end

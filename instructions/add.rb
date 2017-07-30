@@ -11,13 +11,12 @@ class Add
   end
 
   def execute(cpu)
-    reg_x = @opcode[1].hex
-    reg_y = @opcode[2].hex
+    reg_x = @opcode[1]
+    reg_y = @opcode[2]
 
-    value = cpu.v[reg_x].hex + cpu.v[reg_y].hex;
+    value = cpu.v[reg_x] + cpu.v[reg_y]
     cpu.flag = value>0xff
-    value = value & 0b011111111
-    cpu.v[reg_x] = value.to_s.rjust(2, "0")
+    cpu.v[reg_x] = value & 0b011111111  # you could also do: value % 256
   end
 
   def to_s

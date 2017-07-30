@@ -98,10 +98,7 @@ class Emular
       puts "bye!"
       exit
     when "r", "reg"
-      cpu.v.each_with_index do |reg, index|
-        print "#{index.to_s(16)}: #{reg}\t\t\t"
-        print "\n" if (index+1)%4==0
-      end
+      puts cpu.v.to_s
       puts "i: #{hex(cpu.i)}"
       p cpu.v
     when "stack","st"
