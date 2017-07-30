@@ -43,7 +43,11 @@ class FrameBuffer
     result = ""
     @frame_buffer.each_with_index do |row, y|
       row.each_with_index do |column, x|
-        result += @frame_buffer[y][x].to_s
+        if (@frame_buffer[y][x].to_s=="0")
+          result += " "
+        else
+          result += "M" # @frame_buffer[y][x].to_s
+        end
       end
       result += "\n"
     end
