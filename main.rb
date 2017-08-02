@@ -8,7 +8,7 @@ def starts_with_hyphen?(word)
 end
 
 def hex(dec)
-  "0x#{dec.to_s(16)} (#{dec})"
+  "0x#{dec.to_s(16).rjust(2, "0")} (#{dec})"
 end
 
 

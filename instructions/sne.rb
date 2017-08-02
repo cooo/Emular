@@ -18,7 +18,7 @@ class Sne
   end
 
   def to_s
-    "#{@opcode}: SNE Vx, byte\t\t\t => SNE V#{@opcode[1]}, #{@opcode[2,2]}"
+    "#{@opcode}: SNE Vx, byte\t\t\t => SNE V#{@opcode[1]} != #{@opcode[2,2]}"
   end
 
 end

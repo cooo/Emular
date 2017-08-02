@@ -18,7 +18,7 @@ class Se
   end
 
   def to_s
-    "#{@opcode}: SE Vx, byte\t\t\t => SE V#{@opcode[1]}, #{@opcode[2,2]}"
+    "#{@opcode}: SE Vx, byte\t\t\t => SE V#{@opcode[1]} == #{@opcode[2,2]}"
   end
 
 end

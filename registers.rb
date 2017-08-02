@@ -9,17 +9,17 @@ class Registers
   def []=(loc, val)
     #TODO use decimal internally, instead of string, only at to_s do to_s(16).rjust(2, "0")
     if (val.class.eql?(String))
-      p "write string: loc:#{loc} val:#{val}"
-      @v[loc.hex].value = val.hex.to_s(16).rjust(2, "0")
+      p "write string: loc:v#{loc} val:#{val} (#{val.hex})"
+      @v[loc.hex].value = val.hex
     else
       p "write decimal: loc:#{loc} val:#{val}"
-      @v[loc.hex].value = val.to_s(16).rjust(2, "0")
+      @v[loc.hex].value = val
     end
   end
 
   def [](loc)
-    p "read: loc:#{loc}" 
-    @v[loc.hex].value.hex
+    p "read: loc:#{loc} val:#{hex(@v[loc.hex].value)}"
+    @v[loc.hex].value
   end
 
   def to_s

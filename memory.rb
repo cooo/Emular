@@ -3,21 +3,21 @@ class Memory
   MEMORY_SIZE = 4096
 
   def initialize
-    @memory = Array.new(MEMORY_SIZE, "00")
+    @memory = Array.new(MEMORY_SIZE, 0)
   end
 
   def write(address, *content)
     content.each_with_index do |value, index|
-      @memory[address+index] = value.to_s(16).rjust(2, "0")
+      @memory[address+index] = value
     end
   end
 
   def fetch(pc)
-    @memory[pc] + @memory[pc+1]
+    self[pc] + self[pc+1]
   end
 
   def [](address)
-    @memory[address]
+    @memory[address].to_s(16).rjust(2, "0")
   end
 
   def size
@@ -27,7 +27,7 @@ class Memory
   def to_s(from, to)
     result = ""
     from.upto(to) do |i|
-      result += "#{hex(i)}: #{@memory[i]}\n"
+      result += "#{hex(i)}: #{hex(@memory[i])}\n"
     end
     result
   end

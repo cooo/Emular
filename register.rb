@@ -6,11 +6,11 @@ class Register
 
   def initialize(name)
     @name  = name
-    @value = "00"
+    @value = 0
   end
 
   def to_s
-    "#{@name}: #{@value}"
+    "#{@name}: #{hex(@value)}"
   end
 
 end

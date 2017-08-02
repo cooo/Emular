@@ -18,7 +18,7 @@ class LdKey
   end
 
   def to_s
-    "#{@opcode}: LD Vx, K\t\t\t => LD V#{@opcode[1]}, K}"
+    "#{@opcode}: LD Vx, K\t\t\t => LD V#{@opcode[1]} <-- K"
   end
 
 end
