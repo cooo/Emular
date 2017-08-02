@@ -94,13 +94,12 @@ class Emular
       @halt = false
       
       return true
-    when "q"
+    when "q", "e", "quit", "exit"
       puts "bye!"
       exit
     when "r", "reg"
       puts cpu.v.to_s
-      puts "i: #{hex(cpu.i)}"
-      p cpu.v
+      puts "i: #{hex(cpu.i)} #{cpu.dt}"
     when "stack","st"
       puts @stack.to_s
     when "fb","fr"

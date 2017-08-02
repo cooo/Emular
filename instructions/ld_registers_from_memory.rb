@@ -19,7 +19,7 @@ class LdRegistersFromMemory
   end
 
   def to_s
-    "#{@opcode}: LD Vx, [I]\t\t\t => LD V0..V#{@opcode[1]}, [I]"
+    "#{@opcode}: LD Vx, [I]\t\t\t => LD V0..V#{@opcode[1]} <-- [I]"
   end
 
 end

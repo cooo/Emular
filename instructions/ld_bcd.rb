@@ -22,7 +22,7 @@ class LdBcd
   end
 
   def to_s
-    "#{@opcode}: LD B, Vx\t\t\t => LD B, V#{@opcode[1]}"
+    "#{@opcode}: LD B, Vx\t\t\t => LD B <-- V#{@opcode[1]}"
   end
 
 end

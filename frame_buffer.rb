@@ -22,7 +22,7 @@ class FrameBuffer
   def write(x,y, sprite)
     puts "write at #{x}, #{y}"
     sprite.each do |line|
-      puts line.hex.to_s(2)
+      puts line.hex.to_s(2).rjust(8, "0")
     end
 
     collision = false

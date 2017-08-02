@@ -14,7 +14,7 @@ class LdByte
   end
 
   def to_s
-    "#{@opcode}: LD Vx, byte\t\t\t => LD V#{@opcode[1]}, #{@opcode[2,2]}"
+    "#{@opcode}: LD Vx, byte\t\t\t => LD V#{@opcode[1]} <-- 0x#{@opcode[2,2]} (#{@opcode[2,2].hex})"
   end
 
 end

@@ -14,7 +14,7 @@ class LdIndex
   end
 
   def to_s
-    "#{@opcode}: LD I, addr\t\t\t => LD I, 0x#{@opcode[1,3]} (#{@opcode[1,3].hex})"
+    "#{@opcode}: LD I, addr\t\t\t => LD I <-- 0x#{@opcode[1,3]} (#{@opcode[1,3].hex})"
   end
 
 end

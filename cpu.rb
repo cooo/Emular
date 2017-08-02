@@ -12,6 +12,7 @@ class Cpu
     @emular = emular
     @v = Registers.new
     @i = 0
+    @delay_timer = Register.new("dt")
   end
 
   def instructions
@@ -25,11 +26,23 @@ class Cpu
   end
 
   def find(opcode)
-    instructions.find { |instruction| instruction.match?(opcode)}
+    instructions.find { |instruction| instruction.match?(opcode) }
   end
 
   def flag=(set)
     v[FLAG] = set ? "01" : "00"
+  end
+
+  def dt
+    @delay_timer
+  end
+
+  def delay_timer
+    @delay_timer.value
+  end
+
+  def delay_timer=(value)
+    @delay_timer.value = value
   end
 
 end
