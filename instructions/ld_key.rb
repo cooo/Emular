@@ -11,10 +11,13 @@ class LdKey
 
   def execute(cpu)
     reg_x = @opcode[1]
-    puts cpu.emular.frame_buffer
-    puts "key?:"
-    key = STDIN.gets
-    cpu.v[reg_x] = key.chomp
+    found = ""
+    cpu.emular.keys.each { |key,value| found = key if value }
+    if found.empty?
+      cpu.emular.pc -= 2
+    else
+      cpu.v[reg_x] = found
+    end    
   end
 
   def to_s

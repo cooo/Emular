@@ -12,8 +12,8 @@ class Sknp
 
   def execute(cpu)
     reg_x = @opcode[1]
-    # TODO: check the keyboard
-    cpu.emular.pc_inc
+   
+    cpu.emular.pc_inc unless cpu.emular.keys[reg_x]
   end
 
   def to_s

@@ -1,24 +1,39 @@
+
 require './cpu.rb'
 require './memory.rb'
 require './stack.rb'
 require './frame_buffer.rb'
 
-class Emular
-
+class Emular 
+  
   attr_reader :use_debugger, :halt
   attr_reader :cpu
   attr_accessor :pc, :stack, :memory, :frame_buffer
+
+  attr_accessor :keys
 
   attr_reader :breakpoints
 
   ROM_START = 0x200
 
   def initialize(options)
+
+    @frame_buffer = FrameBuffer.new
     @use_debugger = options[:debug]
     @cpu = Cpu.new(self)
     @halt = true
 
     @breakpoints = []
+
+    @keys = Hash.new
+    (0..15).each { |key| @keys[key.to_s(16)] = false }
+
+    if use_debugger
+      puts "running with the debugger"
+    else
+      puts "running"
+    end
+
   end
 
   def pc_inc
@@ -28,7 +43,7 @@ class Emular
   def reset
     @memory = Memory.new
     @stack = Stack.new
-    @frame_buffer = FrameBuffer.new
+    @frame_buffer.clear
     @pc = ROM_START
     @sp = 0
   end
@@ -42,44 +57,41 @@ class Emular
     end
   end
 
+  def run2
+    p @keys
+  end
+
   def run
+    
+        # frame_buffer[10][3] = 1	# y,x
 
-    # frame_buffer[10][3] = 1	# y,x
-
-    if use_debugger
-      puts "running with the debugger"
-    else
-      puts "running"
-    end
 
     emulate = true
     @do_not_stop = true
-    while(true) do
+
+    (0..50).each do
+
       command = STDIN.gets if (use_debugger && @halt)
       emulate = debug(command) if command
       
       if emulate
         opcode = @memory.fetch(pc)
-        #puts "pc: #{pc} use_d: #{use_debugger} bp?#{breakpoint?(pc)} halt?: #{@halt}"
+        # puts "use_debugger: #{use_debugger} bp?#{breakpoint?(pc)} do_not_stop?: #{@do_not_stop}"
         if (use_debugger && breakpoint?(pc)) && @do_not_stop
           @halt = true
           @do_not_stop = true
           puts "breakpoint hit at #{hex(pc)}"
-          next  # skip exec
+          return  # skip exec
+        else
+          @do_not_stop = true # allow s to do one step
         end
 
         cpu.execute(opcode)
 
         pc_inc
 
-        if (pc-ROM_START >= @rom.size)
-          break
-        end
-        #render
-
       end
     end
-
   end
 
   def debug(command)
@@ -216,17 +228,6 @@ class Emular
     breakpoints.include?(address)
   end
 
-
-
-  def to_s
-
-    # memory.each do |byte|
-    # 	p byte
-      
-    # end
-    
-  end
-
   def render
     frame_buffer.each_with_index do |row, y|
       print y.to_s.rjust(3, " ") + " "
@@ -236,5 +237,7 @@ class Emular
       print "\n"
     end
   end
+
+  
 
 end

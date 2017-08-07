@@ -6,6 +6,14 @@ class FrameBuffer
     @frame_buffer = Array.new(SCREEN_HEIGHT) { Array.new(SCREEN_WIDTH, 0) }
   end
 
+  def width
+    SCREEN_WIDTH
+  end
+
+  def height
+    SCREEN_HEIGHT
+  end
+
   def clear
     @frame_buffer.each_with_index do |row, y|
       row.each_with_index do |pos, x|
@@ -37,6 +45,10 @@ class FrameBuffer
       end
     end
     collision
+  end
+
+  def at(y,x)
+    @frame_buffer[y][x]
   end
 
   def to_s

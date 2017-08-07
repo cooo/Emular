@@ -20,7 +20,7 @@ class Add
   end
 
   def to_s
-    "#{@opcode}: ADD Vx, Vy\t\t\t => ADD V#{@opcode[1]}, V#{@opcode[2]}"
+    "#{@opcode}: ADD Vx, Vy\t\t\t => ADD V#{@opcode[1]} <-- V#{@opcode[1]} + V#{@opcode[2]}"
   end
 
 end

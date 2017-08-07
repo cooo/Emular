@@ -1,6 +1,7 @@
 require './io.rb'
 require './rom.rb'
 require './emular.rb'
+require './display.rb'
 
 
 def starts_with_hyphen?(word)
@@ -32,7 +33,18 @@ rom = Rom.new(instructions)
 
 emular = Emular.new(debug: debug) # create a Chip8 emulator
 
+display = Display.new(
+  width: emular.frame_buffer.width, 
+  height: emular.frame_buffer.height, 
+  caption: file
+)
+
 emular.reset        # turns the machine to a default state
 emular.load(rom)    # loads a rom in memory
-emular.run          # runs the program in memory
+
+display.emular = emular
+
+display.show        # calls display.update & display.render
+#emular.run          # runs the program in memory
+
 #p emular.memory
