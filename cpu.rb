@@ -13,6 +13,7 @@ class Cpu
     @v = Registers.new
     @i = Register.new("index")
     @delay_timer = Register.new("dt")
+    @sound_timer = Register.new("st")
   end
 
   def instructions
@@ -59,6 +60,18 @@ class Cpu
 
   def delay_timer=(value)
     @delay_timer.value = value
+  end
+
+  def st
+    @sound_timer
+  end
+
+  def sound_timer
+    @sound_timer.value
+  end
+
+  def sound_timer=(value)
+    @sound_timer.value = value
   end
 
 end

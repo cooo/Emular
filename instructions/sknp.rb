@@ -12,12 +12,18 @@ class Sknp
 
   def execute(cpu)
     reg_x = @opcode[1]
+    value = cpu.v[reg_x].to_s(16)
+
+    p "SKNP"
+    p value
+    p cpu.emular.keys
+    p "=> #{'do it' unless cpu.emular.keys[value]}"
    
-    cpu.emular.pc_inc unless cpu.emular.keys[reg_x]
+    cpu.emular.pc_inc unless cpu.emular.keys[value]
   end
 
   def to_s
-    "#{@opcode}: SKNP VX\t\t\t => SKNP #{@opcode[1]}"
+    "#{@opcode}: SKNP VX\t\t\t => SKNP v#{@opcode[1]}"
   end
 
 end

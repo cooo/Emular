@@ -8,10 +8,10 @@ class Instructions
       require file
 
       extension = File.extname(file)
-      class_name = File.basename(file, extension)
+      file_name = File.basename(file, extension)
       
-      instruction = classify(class_name)
-      instructions.push(instruction.new) unless instruction.name.eql?("NoOp")
+      instruction = classify(file_name)
+      instructions.push(instruction.new) unless instruction.eql?(NoOp)
     end
 
     instructions.push(NoOp.new)

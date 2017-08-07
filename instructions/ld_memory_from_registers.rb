@@ -14,7 +14,7 @@ class LdMemoryFromRegisters
     content = Array.new(registers) { |i| cpu.v[i.to_s] }
     cpu.emular.memory.write(cpu.i, *content)
 
-    cpu.i = cpu.i + registers + 1   # there's a discussion about this line
+    #cpu.i = cpu.i + registers + 1   # there's a discussion about this line
   end
 
   def to_s

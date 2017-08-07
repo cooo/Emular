@@ -11,12 +11,12 @@ class LdKey
 
   def execute(cpu)
     reg_x = @opcode[1]
-    found = ""
-    cpu.emular.keys.each { |key,value| found = key if value }
-    if found.empty?
-      cpu.emular.pc -= 2
+    
+    found = cpu.emular.keys.select{|k,v| v }.keys
+    if found.any?
+      cpu.v[reg_x] = found.first
     else
-      cpu.v[reg_x] = found
+      cpu.emular.pc -= 2
     end    
   end
 

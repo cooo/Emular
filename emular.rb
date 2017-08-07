@@ -25,8 +25,7 @@ class Emular
 
     @breakpoints = []
 
-    @keys = Hash.new
-    (0..15).each { |key| @keys[key.to_s(16)] = false }
+    @keys = Hash.new(false)
 
     if use_debugger
       puts "running with the debugger"
@@ -58,13 +57,10 @@ class Emular
   end
 
   def run2
-    p @keys
+    p keys
   end
 
   def run
-    
-        # frame_buffer[10][3] = 1	# y,x
-
 
     emulate = true
     @do_not_stop = true
@@ -111,7 +107,7 @@ class Emular
       exit
     when "r", "reg"
       puts cpu.v.to_s
-      puts "i: #{hex(cpu.i)} #{cpu.dt}"
+      puts "i: #{hex(cpu.i)} #{cpu.dt} #{cpu.st}"
     when "stack","st"
       puts @stack.to_s
     when "fb","fr"
@@ -144,6 +140,8 @@ class Emular
       else
         puts "that breakpoint does not exist"
       end
+    when "k"
+      p keys
     when /^[l|list].*/
       options = command.split(/ |,/)
       option_1 = options[1].strip if options.size>1
@@ -197,6 +195,7 @@ class Emular
       puts "<enter> = repeats last command"
       puts "c       = continue"
       puts "r       = show the registers, v1..vf and index (i)"
+      puts "k       = shows which keys are down"
       puts "st      = show the stack with the stack pointer (sp)"
       puts "fb      = display the frame buffer"
       puts "pc      = show the program counter (pc)"
