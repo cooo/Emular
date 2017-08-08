@@ -62,6 +62,10 @@ class Cpu
     @delay_timer.value = value
   end
 
+  def delay
+    dt.value -= 1 if dt.value > 0
+  end
+
   def st
     @sound_timer
   end

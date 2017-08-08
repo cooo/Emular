@@ -65,7 +65,7 @@ class Emular
     emulate = true
     @do_not_stop = true
 
-    (0..50).each do
+    (0..10).each do
 
       command = STDIN.gets if (use_debugger && @halt)
       emulate = debug(command) if command
@@ -85,6 +85,10 @@ class Emular
         cpu.execute(opcode)
 
         pc_inc
+
+        
+        cpu.delay
+        
 
       end
     end

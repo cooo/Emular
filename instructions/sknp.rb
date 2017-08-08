@@ -14,11 +14,6 @@ class Sknp
     reg_x = @opcode[1]
     value = cpu.v[reg_x].to_s(16)
 
-    p "SKNP"
-    p value
-    p cpu.emular.keys
-    p "=> #{'do it' unless cpu.emular.keys[value]}"
-   
     cpu.emular.pc_inc unless cpu.emular.keys[value]
   end
 
