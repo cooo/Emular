@@ -13,4 +13,8 @@ class Register
     "#{@name}: #{hex(@value)}"
   end
 
+  def tick
+    @value -= 1
+  end
+
 end

@@ -78,4 +78,8 @@ class Cpu
     @sound_timer.value = value
   end
 
+  def sound
+    st.value -= 1 if st.value > 0
+  end
+
 end

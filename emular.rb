@@ -1,4 +1,3 @@
-
 require './cpu.rb'
 require './memory.rb'
 require './stack.rb'
@@ -87,7 +86,7 @@ class Emular
         pc_inc
 
         
-        cpu.delay
+        
         
 
       end

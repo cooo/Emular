@@ -11,24 +11,24 @@ class Display < Gosu::Window
     29 => 'a', 27 => '0',  6 => 'b', 25 => 'f'      # z,x,c,v
   }
   
-  attr_accessor :emular
+  attr_reader :emular
 
-  def initialize(options)
-    p "init w#{options[:width]} h#{options[:height]}"
+  def initialize(emular, options)
     super options[:width] * SCALE, options[:height] * SCALE
     self.caption = options[:caption]
+    @emular = emular
+    @beep = Gosu::Sample.new("sound/beep.wav")
     @draw_count = 0
   end
 
-  def update
-    @u1 = Time.now
-    #p "update"
+  def update    
     emular.run
+    beep if emular.cpu.sound_timer > 0
+    emular.cpu.st.tick
+    emular.cpu.dt.tick
   end
 
   def draw
-    @d1 = Time.now
-    #puts "draw:#{@draw_count}\t\t\t\t\t#{@d1}\t\t\t\t\t#{(@d1-@u1)*1000}"
     (0..emular.frame_buffer.height-1).each do |y|
       (0..emular.frame_buffer.width-1).each do |x|
         pixel = emular.frame_buffer.at(y,x) * SCALE
@@ -48,6 +48,10 @@ class Display < Gosu::Window
 
   def button_up(i)
     emular.keys[KEY_MAP[i]] = false if valid_key?(i)
+  end
+
+  def beep
+    @beep.play
   end
 
   private
