@@ -2,7 +2,7 @@
 # -------------------------
 # Skip next instruction if Vx = kk. The interpreter compares register Vx to kk, 
 # and if they are equal, increments the program counter by 2.
-class Se
+class SeByte
 
   def match?(opcode)
     @opcode = opcode
@@ -12,9 +12,8 @@ class Se
   def execute(cpu)
     reg_x = @opcode[1]
     byte = @opcode[2,2].hex
-    if (cpu.v[reg_x] == byte)
-      cpu.emular.pc_inc
-    end
+    
+    cpu.emular.pc_inc if (cpu.v[reg_x] == byte)
   end
 
   def to_s

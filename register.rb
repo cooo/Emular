@@ -14,7 +14,7 @@ class Register
   end
 
   def tick
-    @value -= 1
+    @value -= 1 if @value > 0
   end
 
 end

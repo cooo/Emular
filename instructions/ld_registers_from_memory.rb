@@ -15,7 +15,7 @@ class LdRegistersFromMemory
       cpu.v[i.to_s(16)] = cpu.emular.memory[cpu.i + i]
     end
 
-    #cpu.i = cpu.i + registers + 1   # there's a discussion about this line
+    cpu.i = cpu.i + registers + 1   # there's a discussion about this line
   end
 
   def to_s

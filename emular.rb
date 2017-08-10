@@ -5,7 +5,6 @@ require './frame_buffer.rb'
 
 class Emular 
   
-  attr_reader :use_debugger, :halt
   attr_reader :cpu
   attr_accessor :pc, :stack, :memory, :frame_buffer
 
@@ -26,7 +25,7 @@ class Emular
 
     @keys = Hash.new(false)
 
-    if use_debugger
+    if @use_debugger
       puts "running with the debugger"
     else
       puts "running"
@@ -55,24 +54,20 @@ class Emular
     end
   end
 
-  def run2
-    p keys
-  end
-
   def run
 
     emulate = true
     @do_not_stop = true
 
-    (0..10).each do
+    (0..8).each do
 
-      command = STDIN.gets if (use_debugger && @halt)
+      command = STDIN.gets if (@use_debugger && @halt)
       emulate = debug(command) if command
       
       if emulate
         opcode = @memory.fetch(pc)
         # puts "use_debugger: #{use_debugger} bp?#{breakpoint?(pc)} do_not_stop?: #{@do_not_stop}"
-        if (use_debugger && breakpoint?(pc)) && @do_not_stop
+        if (@use_debugger && breakpoint?(pc)) && @do_not_stop
           @halt = true
           @do_not_stop = true
           puts "breakpoint hit at #{hex(pc)}"
@@ -84,10 +79,6 @@ class Emular
         cpu.execute(opcode)
 
         pc_inc
-
-        
-        
-        
 
       end
     end

@@ -38,7 +38,7 @@ display = Display.new(
   width: emular.frame_buffer.width, 
   height: emular.frame_buffer.height, 
   caption: file
-}
+)
 emular.reset        # turns the machine to a default state
 emular.load(rom)    # loads a rom in memory
 
