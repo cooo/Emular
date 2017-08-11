@@ -7,7 +7,6 @@ class Emular
   
   attr_reader :cpu
   attr_accessor :pc, :stack, :memory, :frame_buffer
-
   attr_accessor :keys
 
   ROM_START = 0x200
@@ -26,10 +25,6 @@ class Emular
     else
       puts "running"
     end
-  end
-
-  def debugger
-    @debugger
   end
 
   def rom_start
