@@ -3,7 +3,6 @@ require './rom.rb'
 require './emular.rb'
 require './display.rb'
 
-
 def starts_with_hyphen?(word)
   word[0]=='-'
 end
@@ -31,7 +30,13 @@ io = Io.new(file)
 instructions = io.read
 rom = Rom.new(instructions)
 
-emular = Emular.new(debug: debug) # create a Chip8 emulator
+if debug
+  require './debugger.rb'
+  debugger = Debugger.new
+end
+
+emular = Emular.new # create a Chip8 emulator
+emular.attach(debugger)
 
 display = Display.new(
   emular,

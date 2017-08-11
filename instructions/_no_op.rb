@@ -7,7 +7,6 @@ class NoOp
 
   def execute(cpu)
     puts cpu.v
-#			p cpu.emular.memory
     fail "Emular does not know about #{@opcode}"
   end
 

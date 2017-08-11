@@ -21,9 +21,10 @@ class Cpu
   end
 
   def execute(opcode)
-    instruction = find(opcode)
+    instruction = find(opcode)    
     puts "#{hex(@emular.pc)} #{instruction}"
     instruction.execute(self)
+    @emular.pc_inc
   end
 
   def find(opcode)
