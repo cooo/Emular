@@ -1,4 +1,3 @@
-# Registers are 8 bit, so we use strings with hex value, e.g. "e0"
 class Register
 
   attr_reader :name
