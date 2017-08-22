@@ -26,8 +26,8 @@ class Io
     bytes
   end
   
-  def roms
-    # lists the roms in ROM_PATH
+  def self.games
+    Dir.entries(ROM_PATH).select {|f| !File.directory? f}
   end
 
 end

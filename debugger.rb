@@ -36,6 +36,7 @@ class Debugger
   def halting
     if @halt || breakpoint?(emular.pc)
       puts "breakpoint hit at #{hex(emular.pc)}" if breakpoint?(emular.pc)
+      print "#{hex(emular.pc)} > "
       command = STDIN.gets 
       @execute_instruction = debug(command)
     end
