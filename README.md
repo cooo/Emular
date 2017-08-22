@@ -7,10 +7,10 @@ Emular is a [Chip-8](https://en.wikipedia.org/wiki/CHIP-8) interpreter and debug
 Although there are a few Chip-8 versions, I stick with the 35 (or so) opcodes from the original instruction set. That means that the ROMS that are in the public domain all seem to work just fine currently. It should be quite easy to extend this Chip-8 emulator in something like Super Chip or Chip-48.
 
 ## Screenshots
-![ruby main.rb -s 8 GUESS](screenshots/guess.png)
-![ruby main.rb -s 8 -c green BLINKY](screenshots/blinky.png)
-![ruby main.rb -s 8 -c fuchsia TETRIS](screenshots/tetris.png)
-![ruby main.rb -s 8 -c aqua PONG2](screenshots/pong2.png)
+<img src="screenshots/guess.png" title="ruby main.rb -s 8 GUESS" width="400">
+<img src="screenshots/blinky.png" title="ruby main.rb -s 8 -c green BLINKY" width="400">
+<img src="screenshots/tetris.png" title="ruby main.rb -s 8 -c fuchsia TETRIS" width="400">
+<img src="screenshots/pong2.png" title="ruby main.rb -s 8 -c aqua PONG2" width="400">
 
 ## Dependencies
 Emular is a pretty simple Ruby program, to draw pixels it needs is [Gosu](https://www.libgosu.org/ruby.html), which is a 2D game development library. Gosu is using [SDL](https://www.libsdl.org) for graphics, so to get these two libaries, you can do:
@@ -60,10 +60,9 @@ Combinations are possible:
 ruby main.rb -s 4 -c blue GUESS
 ```
 
-
+## Debugging
 Emular comes with a full debugger which is a great tool to learn about Chip-8 and what it's exactly doing with memory and the registers of the computer.
 
-## Debugging
 Start a debugger with the -d option, and you drop into a command line: 
 
 ```
@@ -134,9 +133,9 @@ You can play the games using the keyboard. Chip-8 is using a bit of a weird layo
 | Chip-8 | Keyboard |
 | --- | --- |
 | <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>C</kbd> | <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> |
-| <kbd>4</kbd><kbd>5</kbd><kbd>6</kbd><kbd>D</kbd> | <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> |
-| <kbd>7</kbd><kbd>8</kbd><kbd>9</kbd><kbd>E</kbd> | <kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd> |
-| <kbd>A</kbd><kbd>0</kbd><kbd>B</kbd><kbd>F</kbd> | <kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd> |
+| <kbd>4</kbd><kbd>5</kbd><kbd>6</kbd><kbd>D</kbd> | &nbsp;<kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> |
+| <kbd>7</kbd><kbd>8</kbd><kbd>9</kbd><kbd>E</kbd> | &nbsp;&nbsp;<kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd> |
+| <kbd>A</kbd><kbd>0</kbd><kbd>B</kbd><kbd>F</kbd> | &nbsp;&nbsp;&nbsp;<kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd> |
 
 The Roms are coming from David Winter's Chip-8 Emulation Page (http://www.pong-story.com/chip8/)
 
